@@ -17,13 +17,18 @@ async def sql_command_insert(state):
         cursor.execute("INSERT INTO users_db VALUES (?, ?, ?, ?)", tuple(data.values()))
         db.commit()
 
+
 async def sql_command_select(message):
     for result in cursor.execute('SELECT * FROM users_db').fetchall():
-        await bot.send_message(message.from_user.id, result[0],
-                               caption=f'ID: {result[0]}\n'
-                                       f'username: {result[1]}\n'
-                                       f'firstname: {result[2]}\n'
-                                       f'lastname: {result[3]}\n')
+        await bot.send_message(message.from_user.id,f'ID: {result[0]}\n'
+                                                    f'Username: {result[1]}\n'
+                                                    f'Firstname: {result[2]}\n'
+                                                    f'Lastname: {result[3]}\n')
+
+
+
+async def sql_casual_select():
+    return cursor.execute('SELECT * FROM anime').fetchall()
 
 async def sql_command_delete(data):
     cursor.execute('DELETE FROM users_db WHERE id == ?', (data,))

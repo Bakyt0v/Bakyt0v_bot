@@ -5,6 +5,7 @@ from config_bot import bot
 from database import user_db
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram.dispatcher.filters import Text
+from keyboard import admin_kb
 
 class User_add(StatesGroup):
     id = State()
@@ -16,7 +17,8 @@ class User_add(StatesGroup):
 async def is_admin_func(message: types.Message):
     global ADMIN_ID
     ADMIN_ID = message.from_user.id
-    await bot.send_message(message.from_user.id, "I can add to data some information just give me a command as /add")
+    await bot.send_message(message.from_user.id, "I can add to data some information just give me a command as /add",
+                           reply_markup=admin_kb.button_admin)
 
 async def cancel_hundler(message: types.Message, state: FSMContext):
     # if message.from_user.id == ADMIN_ID:
@@ -72,7 +74,7 @@ async def complate_delete(call: types.CallbackQuery):
     await call.answer(text=f"{call.data.replace('delete ', '')} deleted", show_alert=True)
 
 async def delete_data(message: types.Message):
-    # if message.forward_from_message_id == ADMIN_ID:
+    if message.forward_from_message_id == ADMIN_ID:
         inserting = await user_db.sql_command_select(message)
         for result in inserting:
             await bot.send_message(message.forward_from_message_id, result[0],
@@ -80,8 +82,9 @@ async def delete_data(message: types.Message):
                                            f'username: {result[1]}\n'
                                            f'firstname: {result[2]}\n'
                                            f'lastname: {result[3]}\n',
-                                   reply_markup=InlineKeyboardMarkup().add(InlineKeyboardButton(f'delete: {result[0]}',
-                                                                                                callback_data=f'delete {result[0]}')))
+                                   reply_markup=InlineKeyboardMarkup().add(InlineKeyboardButton(
+                                       f'delete: {result[0]}',
+                                       callback_data=f'delete {result[0]}')))
 
 
 def register_handler_fsm_admin_user(dp: Dispatcher):
