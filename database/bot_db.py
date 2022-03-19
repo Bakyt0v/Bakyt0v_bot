@@ -1,5 +1,5 @@
 import sqlite3
-from ..tg_bot.config import bot
+from config_bot import bot
 
 
 
@@ -9,11 +9,10 @@ def sql_create():
     cursor = db.cursor()
     if db:
          print('Database connected successfully')
-    db.execute('CREATE TABLE IF NOT EXISTS anime (photo TEXT, title TEXT PRIMARY KEY, description TEXT)')
+    db.execute("CREATE TABLE IF NOT EXISTS anime(photo TEXT, title TEXT PRIMARY KEY, description TEXT)")
     db.commit()
 
 async def sql_command_insert(state):
     async with state.proxy() as data:
-        cursor.execute('INSERT INTO anime VALUES (?, ?, ?)', tuple(data.values()))
+        cursor.execute("INSERT INTO anime VALUES (?, ?, ?)", tuple(data.values()))
         db.commit()
-

@@ -1,7 +1,8 @@
 from aiogram import types, Dispatcher
 from config_bot import bot
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, ParseMode
-import buttonss
+from keyboard import buttonss
+from database import user_db
 
 
 async def hello(message: types.Message):
@@ -39,7 +40,7 @@ async def problem(message: types.Message):
     markup = InlineKeyboardMarkup()
     button_call_1 = InlineKeyboardButton('Next task', callback_data='button_call_1')
     markup.add(button_call_1)
-    photo = open('../media/summfloatinteger.jpg', 'rb')
+    photo = open('../meddia/lesson1/task1.jpg','rb')
     answer1 = ['0.0', '4', '5', '8.0', 'Error']
     question1 = 'Output of this task in picture above'
     await bot.send_photo(
@@ -69,7 +70,7 @@ button_flex = InlineKeyboardButton('Flex_question', callback_data='button_flex')
 markup0.add(button1,button2,button3,button4, button_flex)
 
 async def process_start_command(message: types.Message):
-    photo_1 = open('../media/home_work_solved/task1.png', 'rb')
+    photo_1 = open('../meddia/lesson1/task1.jpg', 'rb')
     await bot.send_photo(
         message.chat.id,
         photo=photo_1
@@ -79,7 +80,7 @@ async def process_start_command(message: types.Message):
 
 
 async def home_work2(message: types.Message):
-    photo_hw2 = open('../media/home_work2/hw2.png', 'rb')
+    photo_hw2 = open('../meddia/lesson1/task1.jpg', 'rb')
     markup_hw = InlineKeyboardMarkup()
     button_home_work2 = InlineKeyboardButton('Я смог решить домашку', callback_data='button_home_work2')
     button_home_work2_2 = InlineKeyboardButton('Я не смог решить домашку', callback_data='button_home_work_2')
@@ -96,6 +97,9 @@ async def new_command(message: types.Message):
     await bot.send_message(message.chat.id,
                            'Здавствуйте, пока не придумал ничего что добавить в эту команду')
 
+async def show_all_anime_command(message: types.Message):
+    await user_db.sql_command_select(message)
+
     # else:
     #     await message.answer(message.text)
 
@@ -107,3 +111,4 @@ def refister_handlers_cilent(dp: Dispatcher):
     dp.register_message_handler(process_start_command, commands=['solve_task'])
     dp.register_message_handler(home_work2, commands=['home_work_2'])
     dp.register_message_handler(new_command, commands=['new_command'])
+    dp.register_message_handler(show_all_anime_command, commands=['user_db'])

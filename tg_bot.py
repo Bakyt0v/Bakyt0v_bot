@@ -1,12 +1,15 @@
 from aiogram import executor
 from config_bot import dp
-from handler import cilent, callback, extra
+from handler import callback, cilent, extra
 from fsm_admin import fsmadmin, fsm_admin_users
-
+from database import bot_db, user_db
 
 # async  def on_startup(_):
 #     bot_db.sql_create()
 
+async def on_startup(_):
+    bot_db.sql_create()
+    user_db.sql_create()
 
 
 fsm_admin_users.register_handler_fsm_admin_user(dp)
@@ -16,4 +19,4 @@ callback.register_handlers_callback(dp)
 extra.register_handler_extra(dp)
 
 if __name__ == '__main__':
-    executor.start_polling(dp, skip_updates=False)
+    executor.start_polling(dp, skip_updates=False, on_startup=on_startup)
