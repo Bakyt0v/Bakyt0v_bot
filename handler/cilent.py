@@ -99,8 +99,7 @@ async def new_command(message: types.Message):
 
 async def show_all_anime_command(message: types.Message):
     await user_db.sql_command_select(message)
-
-    # else:
+# else:
     #     await message.answer(message.text)
 
 def refister_handlers_cilent(dp: Dispatcher):

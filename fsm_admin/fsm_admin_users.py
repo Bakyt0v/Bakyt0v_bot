@@ -25,14 +25,14 @@ async def cancel_hundler(message: types.Message, state: FSMContext):
         await message.reply('Canceled normally')
 
 async def fsm_start(message: types.Message):
-    if message.from_user.id == ADMIN_ID:
+    # if message.from_user.id == ADMIN_ID:
         await User_add.id.set()
         await message.reply("enter start")
 
 
 async def load_id(message: types.Message,
                      state: FSMContext):
-    if message.from_user.id == ADMIN_ID:
+    # if message.from_user.id == ADMIN_ID:
         async with state.proxy() as data:
             data["id"] = message.from_user.id
         await User_add.next()
@@ -40,27 +40,27 @@ async def load_id(message: types.Message,
 
 async def load_username(message: types.Message,
                      state: FSMContext):
-    if message.from_user.id == ADMIN_ID:
-        async with state.proxy() as data:
-            data['username'] = message.from_user.username
+    # if message.from_user.id == ADMIN_ID:
+    async with state.proxy() as data:
+        data['username'] = message.from_user.username
     await User_add.next()
     await message.reply("Admin, send me username, please")
 
 
 async def load_firstname(message: types.Message,
                      state: FSMContext):
-    if message.from_user.id == ADMIN_ID:
-        async with state.proxy() as data:
-            data['fisrtname'] = message.from_user.first_name
+    # if message.from_user.id == ADMIN_ID:
+    async with state.proxy() as data:
+        data['fisrtname'] = message.from_user.first_name
     await User_add.next()
     await message.reply("Admin, send me firstname, please")
 
 
 async def load_lastname(message: types.Message,
                            state: FSMContext):
-    if message.from_user.id == ADMIN_ID:
-        async with state.proxy() as data:
-            data["lastname"] = message.from_user.last_name
+    # if message.from_user.id == ADMIN_ID:
+    async with state.proxy() as data:
+        data["lastname"] = message.from_user.last_name
 
     await user_db.sql_command_insert(state)
     await state.finish()
@@ -72,8 +72,8 @@ async def complate_delete(call: types.CallbackQuery):
     await call.answer(text=f"{call.data.replace('delete ', '')} deleted", show_alert=True)
 
 async def delete_data(message: types.Message):
-    if message.forward_from_message_id == ADMIN_ID:
-        inserting = await user_db.sql_select(message)
+    # if message.forward_from_message_id == ADMIN_ID:
+        inserting = await user_db.sql_command_select(message)
         for result in inserting:
             await bot.send_message(message.forward_from_message_id, result[0],
                                    caption=f'ID: {result[0]}\n'
