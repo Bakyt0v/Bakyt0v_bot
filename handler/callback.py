@@ -6,7 +6,7 @@ from config_bot import bot
 
 # -----------------------------------------------------------------------------------------
 async def solved_task(call: types.CallbackQuery):
-    photo4 = open('../media/home_work_solved/solvedscreen.png','rb')
+    photo4 = open('../media/home_work_solved/solvedscreen.png', 'rb')
     await bot.send_photo(
         call.message.chat.id,
         photo=photo4
@@ -14,7 +14,7 @@ async def solved_task(call: types.CallbackQuery):
 
 
 async def picture(call: types.CallbackQuery):
-    photo4 = open('../media/home_work_solved/picture.jpeg','rb')
+    photo4 = open('../media/home_work_solved/picture.jpeg', 'rb')
     await bot.send_photo(
         call.message.chat.id,
         photo=photo4

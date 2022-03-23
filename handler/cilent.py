@@ -40,7 +40,7 @@ async def problem(message: types.Message):
     markup = InlineKeyboardMarkup()
     button_call_1 = InlineKeyboardButton('Next task', callback_data='button_call_1')
     markup.add(button_call_1)
-    photo = open('../meddia/lesson1/task1.jpg','rb')
+    photo = open('media/summfloatinteger.jpg', 'rb')
     answer1 = ['0.0', '4', '5', '8.0', 'Error']
     question1 = 'Output of this task in picture above'
     await bot.send_photo(
@@ -70,7 +70,7 @@ button_flex = InlineKeyboardButton('Flex_question', callback_data='button_flex')
 markup0.add(button1,button2,button3,button4, button_flex)
 
 async def process_start_command(message: types.Message):
-    photo_1 = open('../meddia/lesson1/task1.jpg', 'rb')
+    photo_1 = open('../media/home_work_solved/task1.png', 'rb')
     await bot.send_photo(
         message.chat.id,
         photo=photo_1
@@ -80,7 +80,7 @@ async def process_start_command(message: types.Message):
 
 
 async def home_work2(message: types.Message):
-    photo_hw2 = open('../meddia/lesson1/task1.jpg', 'rb')
+    photo_hw2 = open('../media/home_work2/hw2.png', 'rb')
     markup_hw = InlineKeyboardMarkup()
     button_home_work2 = InlineKeyboardButton('Я смог решить домашку', callback_data='button_home_work2')
     button_home_work2_2 = InlineKeyboardButton('Я не смог решить домашку', callback_data='button_home_work_2')
