@@ -3,3 +3,5 @@ my_venv
 media
 .idea
 __pycache__
+bot.sqlite3
+home_work_db
