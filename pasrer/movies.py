@@ -1,5 +1,6 @@
 import requests
 from bs4 import  BeautifulSoup
+from random import randint,random
 from requests_html import HTMLSession
 
 URL = 'https://w139.zona.plus/'
@@ -25,7 +26,7 @@ def get_data(html):
         movie.append(
             {"title":URL + item.find('a', class_='results-item').get('href'),
              "image":item.find("meta", itemprop="image").get('content'),
-             'name':item.find('div', class_='results-item-title').get('results-item-title')
+             # 'name':item.find('div', class_='results-item-title').get('results-item-title')
             }
         )
     return movie
@@ -38,7 +39,7 @@ def parser():
         for page in range(0, 1):
             html = get_html(f"https://w139.zona.plus/movies/filter/year-2022/latset/{page}")
             movie.extend(get_data(html.text))
-        return movie
+        return movie[randint(0, len(movie))].values()
     else:
         raise Exception('Error in parser function')
 # parser()
