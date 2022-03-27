@@ -96,5 +96,5 @@ def register_handler_fsm_admin_user(dp: Dispatcher):
     dp.register_message_handler(load_firstname, state=User_add.firstname)
     dp.register_message_handler(load_lastname, state=User_add.lastname)
     dp.register_message_handler(is_admin_func, commands=['user_register'], is_chat_admin=True)
-    dp.register_callback_query_handler(complate_delete, lambda call: call.data and call.data.startwith('delete '))
+    # dp.register_callback_query_handler(complate_delete, lambda call: call.data and call.data.startwith('delete '))
     dp.register_message_handler(delete_data, commands=['delete'])

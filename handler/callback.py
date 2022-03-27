@@ -6,7 +6,7 @@ from config_bot import bot
 
 # -----------------------------------------------------------------------------------------
 async def solved_task(call: types.CallbackQuery):
-    photo4 = open('../media/home_work_solved/solvedscreen.png', 'rb')
+    photo4 = open('media/home_work_solved/solvedscreen.png', 'rb')
     await bot.send_photo(
         call.message.chat.id,
         photo=photo4
@@ -14,7 +14,7 @@ async def solved_task(call: types.CallbackQuery):
 
 
 async def picture(call: types.CallbackQuery):
-    photo4 = open('../media/home_work_solved/picture.jpeg', 'rb')
+    photo4 = open('media/home_work_solved/picture.jpeg', 'rb')
     await bot.send_photo(
         call.message.chat.id,
         photo=photo4
@@ -85,7 +85,7 @@ async def solve2_task(call: types.CallbackQuery):
 
 
 async def solve3_task(call: types.CallbackQuery):
-    photo3 = open('../media/home_work_solved/photo5278541801109700202.jpg', 'rb')
+    photo3 = open('media/home_work_solved/photo5278541801109700202.jpg', 'rb')
     answer4 = ['A','B', 'C', 'All options are not correct', 'All options are correct','None']
     question4 = 'Output of this task in picture above,(WARNING, input lists have given for all task option):'
 
@@ -114,7 +114,7 @@ async def problem2(call: types.CallbackQuery):
                                          callback_data='button_call_2')
     markup1.add(button_call_2)
 
-    photo1 = open('../media/listremoveappend.jpg', 'rb')
+    photo1 = open('media/listremoveappend.jpg', 'rb')
     answer2 = ['1', '2', '3', '4', '5', '6', '7']
     question2 = 'Output of this task in picture above:'
     await bot.send_photo(
@@ -135,7 +135,7 @@ async def problem2(call: types.CallbackQuery):
 
 
 async def problem3(call: types.CallbackQuery):
-    photo2 = open('../media/homework.jpg', 'rb')
+    photo2 = open('media/homework.jpg', 'rb')
     answer3 = ['0','1', '2', '3', '4', '5']
     question3 = 'Output of this task in picture above:'
     await bot.send_photo(
@@ -170,7 +170,7 @@ async def problem3(call: types.CallbackQuery):
 
 
 async def home_work_2(call: types.CallbackQuery):
-    photo_bad = open('../media/home_work2/bad.jpeg', 'rb')
+    photo_bad = open('media/home_work2/bad.jpeg', 'rb')
     markup_bad_1=InlineKeyboardMarkup()
     button_bad_1=InlineKeyboardButton('Если было слишком тяжело попробуйте эту', callback_data='button_bad_1')
     button_bad_2=InlineKeyboardButton('Хотите подсказку', callback_data='button_bad_2')
@@ -186,7 +186,7 @@ async def home_work_2(call: types.CallbackQuery):
 
 
 async def home_work_2_1(call: types.CallbackQuery):
-    photo_bad = open('../media/home_work2/task.jpg', 'rb')
+    photo_bad = open('media/home_work2/task.jpg', 'rb')
     question_bad=' Сможете решить следующую задачу '
     answer_bad=['Легкая задача', 'Тяжелая задача', 'Средняя задача']
 
@@ -208,7 +208,7 @@ async def home_work_2_2(call: types.CallbackQuery):
     )
 
 async def home_work_2_3(call: types.CallbackQuery):
-    photo_hw2 = open('../media/home_work2/hw2.png', 'rb')
+    photo_hw2 = open('media/home_work2/hw2.png', 'rb')
     markup_hw = InlineKeyboardMarkup()
     button_home_work2 = InlineKeyboardButton('Я смог решить домашку', callback_data='button_home_work2')
     button_home_work2_2 = InlineKeyboardButton('Я не смог решить домашку', callback_data='button_home_work_2')
@@ -222,7 +222,7 @@ async def home_work_2_3(call: types.CallbackQuery):
 # _-----------------------------------------------------------------------___________________
 
 async def home_work_22_1(call: types.CallbackQuery):
-    photo_good = open('../media/home_work2/goodjob.jpeg', 'rb')
+    photo_good = open('media/home_work2/goodjob.jpeg', 'rb')
     markup_good_1=InlineKeyboardMarkup()
     button_good_1=InlineKeyboardButton('Было легко', callback_data='button_good_1')
     button_good_2=InlineKeyboardButton('Хотите еще задачки ', callback_data='button_good_2')
@@ -241,7 +241,7 @@ async def home_work_22_2(call: types.CallbackQuery):
 
 
 async def home_work_22_3(call: types.CallbackQuery):
-    photo_good2 = open('../media/home_work2/task1.jpg', 'rb')
+    photo_good2 = open('media/home_work2/task1.jpg', 'rb')
     question_good='Сможете решить следующую задачу '
     answer_good=['Легкая задача', 'Тяжелая задача', 'Средняя задача']
 
@@ -257,7 +257,7 @@ async def home_work_22_3(call: types.CallbackQuery):
         )
 
 async def home_work_22_4(call: types.CallbackQuery):
-    photo_good2 = open('../media/home_work2/home_work2.png', 'rb')
+    photo_good2 = open('media/home_work2/home_work2.png', 'rb')
     question_good='It was easy for you'
     answer_good=['Легкая задача', 'Тяжелая задача', 'Средняя задача']
 
@@ -280,7 +280,7 @@ async def flex_4(call: types.CallbackQuery):
     markup_flex2.add(button_flex2)
     question = 'Flex_question'
     answers = ['1','2','3','4','Error','5']
-    photo_flex2 = open('../media/lesson/flex_5.jpg', 'rb')
+    photo_flex2 = open('media/lesson/flex_5.jpg', 'rb')
     await bot.send_photo(call.message.chat.id, photo=photo_flex2)
     await bot.send_poll(call.message.chat.id,
                         question=question,
@@ -297,7 +297,7 @@ async def flex_5(call: types.CallbackQuery):
     markup_flex1.add(button_flex1)
     question1 = 'Flex_question'
     answers1 = ['1','2','3','4','Error','5']
-    photo_flex1 = open('../media/lesson/photo5294518972076637244.jpg', 'rb')
+    photo_flex1 = open('media/lesson/photo5294518972076637244.jpg', 'rb')
     await bot.send_photo(call.message.chat.id, photo=photo_flex1)
     await bot.send_poll(call.message.chat.id,
                         question=question1,

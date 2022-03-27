@@ -12,7 +12,12 @@ async def on_startup(_):
     user_db.sql_create()
     asyncio.create_task(scheduler())
     asyncio.create_task(deadline_hw())
+
+
     print('Bot is online')
+
+
+
 
 
 
