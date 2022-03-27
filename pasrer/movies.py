@@ -27,7 +27,7 @@ def get_data(html):
     for item in items:
         movie.append(
             {"title":URL + item.find('a', class_='results-item').get('href'),
-             "image":URL + item.find("meta", itemprob="image").get('content')
+             "image":item.find("meta", itemprop="image").get('content')
             }
         )
     print(movie)
