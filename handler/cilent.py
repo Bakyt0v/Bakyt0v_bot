@@ -111,9 +111,9 @@ async def parser_anime(message: types.Message):
 
 async def parser_movie(message: types.Message):
     data = movies.parser()
-    await bot.send_message(message.chat.id, data)
-    # for i in data:
-    #     await bot.send_message(message.chat.id, i)
+    # await bot.send_message(message.chat.id, data)
+    for i in data:
+        await bot.send_message(message.chat.id, i)
 
 def refister_handlers_cilent(dp: Dispatcher):
     dp.register_message_handler(hello, commands=['start'])
