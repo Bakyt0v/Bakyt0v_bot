@@ -2,7 +2,7 @@ import requests
 from bs4 import  BeautifulSoup
 from requests_html import HTMLSession
 
-URL = 'https://w139.zona.plus/movies/filter/year-2022'
+URL = 'https://w139.zona.plus/'
 
 HEADERS = {
     'Accept': '*/*',
@@ -17,9 +17,6 @@ def get_html(url, params=''):
 def get_data(html):
     soup = BeautifulSoup(html, 'html.parser')
     items = soup.find_all('li', class_="results-item-wrap")
-    # metatags = soup.find_all('meta',attrs={'name':'generator'})
-    # session = HTMLSession()
-    # response = session.get()
     movie = []
 
 
@@ -27,7 +24,8 @@ def get_data(html):
     for item in items:
         movie.append(
             {"title":URL + item.find('a', class_='results-item').get('href'),
-             "image":item.find("meta", itemprop="image").get('content')
+             "image":item.find("meta", itemprop="image").get('content'),
+             'name':item.find('div', class_='results-item-title').get('results-item-title')
             }
         )
     return movie
@@ -40,7 +38,7 @@ def parser():
         for page in range(0, 1):
             html = get_html(f"https://w139.zona.plus/movies/filter/year-2022/latset/{page}")
             movie.extend(get_data(html.text))
-        return movie[0].values()
+        return movie
     else:
         raise Exception('Error in parser function')
 # parser()
