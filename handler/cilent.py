@@ -109,6 +109,7 @@ async def parser_anime(message: types.Message):
 # else:
     #     await message.answer(message.text)
 
+
 async def parser_movie(message: types.Message):
     data = movies.parser()
     # await bot.send_message(message.chat.id, data)

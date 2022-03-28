@@ -1,7 +1,6 @@
 import sqlite3
 from config_bot import bot
 
-
 def sql_create():
     global db, cursor
     db = sqlite3.connect('home_work_db')

@@ -61,7 +61,6 @@ async def load_description(message: types.Message,
         #     await message.reply(str(data))
         # await state.finish()
 
-
 def register_handler_fsmadmin(dp: Dispatcher):
     dp.register_message_handler(fsm_start, commands=['download'], state=None)
     dp.register_message_handler(cancel_hundler, state='*', commands='cancel')

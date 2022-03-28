@@ -39,6 +39,7 @@ async def scheduler():
         await aioschedule.run_pending()
         await asyncio.sleep(1)
 
+
 async def deadline_hw():
     aioschedule.every(1).wednesday.at('00:00').do(deadline)
     while True:

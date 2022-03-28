@@ -9,6 +9,7 @@ async def secret_word(message: types.Message):
 #     ban_badwords = bad_words
 #     txt_words = open('media/bad'),'r'
 
+
     # for i in ban_badwords or txt_words:
     #     if i in message.text.lower().replace("",""):
     #         await message.delete()

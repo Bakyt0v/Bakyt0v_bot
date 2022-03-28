@@ -20,8 +20,6 @@ async def on_startup(_):
 
 
 
-
-
 fsm_admin_users.register_handler_fsm_admin_user(dp)
 fsmadmin.register_handler_fsmadmin(dp)
 cilent.refister_handlers_cilent(dp)
