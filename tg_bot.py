@@ -1,7 +1,7 @@
 import asyncio
 from aiogram import executor
 from config_bot import dp
-from handler import callback, cilent, extra, notification
+from handler import callback, cilent, extra, notification, inline
 from fsm_admin import fsmadmin, fsm_admin_users
 from database import bot_db, user_db
 from handler.notification import scheduler, deadline_hw
@@ -24,6 +24,7 @@ fsm_admin_users.register_handler_fsm_admin_user(dp)
 fsmadmin.register_handler_fsmadmin(dp)
 cilent.refister_handlers_cilent(dp)
 callback.register_handlers_callback(dp)
+inline.register_handlers_inline(dp)
 extra.register_handler_extra(dp)
 notification.register_handler_notification(dp)
 

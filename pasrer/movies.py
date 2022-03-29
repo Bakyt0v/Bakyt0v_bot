@@ -29,7 +29,7 @@ def get_data(html):
              # 'name':item.find('div', class_='results-item-title').get('results-item-title')
             }
         )
-    return movie
+    return movie[0].values()
 
 
 
@@ -37,10 +37,10 @@ def parser():
     html  = get_html(URL)
     if html.status_code == 200:
         movie = []
-        for page in range(0, 1):
+        for page in range(0, 5):
             html = get_html(f"https://w139.zona.plus/movies/filter/year-2022/latset/{page}")
             movie.extend(get_data(html.text))
-        return movie[randint(0, len(movie))].values()
+        return movie
     else:
         raise Exception('Error in parser function')
 # parser()
