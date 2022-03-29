@@ -51,7 +51,6 @@ async def inline_wiki(query: types.InlineQuery):
 # +++++++++++++++++++++GOOOGLE++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 
-
 async def inline_google(query: types.InlineQuery):
     text = query.query or "echo"
     links= "https://www.google.com/search?q=" + text

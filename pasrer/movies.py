@@ -32,7 +32,6 @@ def get_data(html):
     return movie[0].values()
 
 
-
 def parser():
     html  = get_html(URL)
     if html.status_code == 200:

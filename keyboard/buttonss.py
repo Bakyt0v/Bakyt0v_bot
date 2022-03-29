@@ -6,7 +6,6 @@ button_location = KeyboardButton('Share location', request_location=True)
 button_info = KeyboardButton('Share_info', request_contact=True)
 
 
-
 keyboard_stat = ReplyKeyboardMarkup(resize_keyboard=True, row_width= 4)
 
 

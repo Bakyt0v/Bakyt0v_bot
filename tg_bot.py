@@ -13,7 +13,6 @@ async def on_startup(_):
     asyncio.create_task(scheduler())
     asyncio.create_task(deadline_hw())
 
-
     print('Bot is online')
 
 
