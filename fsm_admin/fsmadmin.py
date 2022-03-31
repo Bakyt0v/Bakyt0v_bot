@@ -91,7 +91,7 @@ async def get_all_users(message: types.Message):
 
 
 async def films(message: types.Message):
-    image = movies.parser()
+    image = movies.URL
     psql_db.cursor.execute(f"SELECT image from movies WHERE image = {image}")
     result = psql_db.cursor.fetchone()
 
