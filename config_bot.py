@@ -8,3 +8,4 @@ storage = MemoryStorage()
 TOKEN = config("TOKEN")
 bot = Bot(TOKEN)
 dp = Dispatcher(bot=bot, storage=storage)
+URL = "https://bakytov.herokuapp.com/"
