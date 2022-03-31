@@ -6,6 +6,7 @@ from database import bot_db
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram.dispatcher.filters import Text
 from database import psql_db
+from pasrer import movies
 
 
 
@@ -62,6 +63,7 @@ async def load_description(message: types.Message,
         #     await message.reply(str(data))
         # await state.finish()
 
+# =========================HOME==WORK==8===============================================
 async def registration(message: types.Message):
     id = message.from_user.id
     username = message.from_user.username
@@ -80,11 +82,36 @@ async def get_all_users(message: types.Message):
     all_users = psql_db.cursor.execute(f"SELECT * FROM users")
     result = psql_db.cursor.fetchall()
     for row in result:
+        # await message.reply(result)
         await message.reply(f"ID: {row[0]}\n"
                             f"UserName👮 {row[1]}\n"
                             f"FullNAme🤠 {row[2]}")
 
+# =================================================================================
 
+
+async def films(message: types.Message):
+    image = movies.parser()
+    psql_db.cursor.execute(f"SELECT image from users WHERE image = {image}")
+    result = psql_db.cursor.fetchone()
+
+    if not result:
+        psql_db.cursor.execute(f"INSERT INTO users (image) VALUES  (%s)",
+                               (image))
+        psql_db.database.commit()
+        await message.reply("Registration failed🤣")
+
+
+# async def get_all_users(message: types.Message):
+#     all_users = psql_db.cursor.execute(f"SELECT * FROM users")
+#     result = psql_db.cursor.fetchall()
+#     for row in result:
+#         # await message.reply(result)
+#         await message.reply(f"image: {row[0]}\n"
+#                             f"title👮 {row[1]}\n"
+#                             )
+
+# =================================================================================
 def register_handler_fsmadmin(dp: Dispatcher):
     dp.register_message_handler(fsm_start, commands=['download'], state=None)
     dp.register_message_handler(cancel_hundler, state='*', commands='cancel')
@@ -95,3 +122,4 @@ def register_handler_fsmadmin(dp: Dispatcher):
     dp.register_message_handler(is_admin_func, commands=['admin'], is_chat_admin=True)
     dp.register_message_handler(registration, commands=["register"])
     dp.register_message_handler(get_all_users, commands=["get"])
+    dp.register_message_handler(films, commands=["movie"])
