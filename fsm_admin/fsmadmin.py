@@ -5,6 +5,7 @@ from config_bot import bot
 from database import bot_db
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram.dispatcher.filters import Text
+from database import psql_db
 
 
 
@@ -61,6 +62,20 @@ async def load_description(message: types.Message,
         #     await message.reply(str(data))
         # await state.finish()
 
+async def registration(message: types.Message):
+    id = message.from_user.id
+    username = message.from_user.username
+    fullname = message.from_user.full_name
+    psql_db.cursor.execute(f"SELECT id from users WHERE id = {id}")
+    result = psql_db.cursor.fetchone()
+
+    if not result:
+        psql_db.cursor.execute(f"INSERT INTO users (id, user_name, full_name) VALUES  (%s, %s, %s)",
+                               (id, username, fullname))
+        psql_db.database.commit()
+
+
+
 def register_handler_fsmadmin(dp: Dispatcher):
     dp.register_message_handler(fsm_start, commands=['download'], state=None)
     dp.register_message_handler(cancel_hundler, state='*', commands='cancel')
@@ -69,3 +84,4 @@ def register_handler_fsmadmin(dp: Dispatcher):
     dp.register_message_handler(load_title, state=FSMADMIN.title)
     dp.register_message_handler(load_description, state=FSMADMIN.description)
     dp.register_message_handler(is_admin_func, commands=['admin'], is_chat_admin=True)
+    dp.register_message_handler(registration, commands=["register"])

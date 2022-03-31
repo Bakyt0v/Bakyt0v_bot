@@ -116,6 +116,8 @@ async def parser_movie(message: types.Message):
     for i in data:
         await bot.send_message(message.chat.id, i)
 
+
+
 def refister_handlers_cilent(dp: Dispatcher):
     dp.register_message_handler(hello, commands=['start'])
     dp.register_message_handler(help, commands=['help'])

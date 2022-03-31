@@ -30,7 +30,7 @@ extra.register_handler_extra(dp)
 notification.register_handler_notification(dp)
 
 if __name__ == '__main__':
-    executor.start_polling(dp, skip_updates=False, on_startup=on_startup)
+    executor.start_polling(dp, skip_updates=False, on_startup=on_startup),
     executor.start_webhook(
         dispatcher=dp,
         webhook_path="",
@@ -38,5 +38,4 @@ if __name__ == '__main__':
         on_shutdown=on_shutdown,
         skip_updates=True,
         host="0.0.0.0",
-        port=int(config("PORT", default=5000)),
-             )
+        port=int(config("PORT", default=5000)))
