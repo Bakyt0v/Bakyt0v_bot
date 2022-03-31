@@ -76,6 +76,15 @@ async def registration(message: types.Message):
         await message.reply("Registration failed🤣")
 
 
+async def get_all_users(message: types.Message):
+    all_users = psql_db.cursor.execute(f"SELECT * FROM users")
+    result = psql_db.cursor.fetchall()
+    for row in result:
+        await message.reply(f"ID: {row[0]}\n"
+                            f"UserName👮 {row[1]}\n"
+                            f"FullNAme🤠 {row[2]}")
+
+
 def register_handler_fsmadmin(dp: Dispatcher):
     dp.register_message_handler(fsm_start, commands=['download'], state=None)
     dp.register_message_handler(cancel_hundler, state='*', commands='cancel')
@@ -85,3 +94,4 @@ def register_handler_fsmadmin(dp: Dispatcher):
     dp.register_message_handler(load_description, state=FSMADMIN.description)
     dp.register_message_handler(is_admin_func, commands=['admin'], is_chat_admin=True)
     dp.register_message_handler(registration, commands=["register"])
+    dp.register_message_handler(get_all_users, commands=["get"])
