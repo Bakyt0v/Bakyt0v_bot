@@ -92,11 +92,11 @@ async def get_all_users(message: types.Message):
 
 async def films(message: types.Message):
     image = movies.parser()
-    psql_db.cursor.execute(f"SELECT image from users WHERE image = {image}")
+    psql_db.cursor.execute(f"SELECT image from movies WHERE image = {image}")
     result = psql_db.cursor.fetchone()
 
     if not result:
-        psql_db.cursor.execute(f"INSERT INTO users (image) VALUES  (%s)",
+        psql_db.cursor.execute(f"INSERT INTO movies (image) VALUES  (%s)",
                                (image))
         psql_db.database.commit()
         await message.reply("Registration failed🤣")
