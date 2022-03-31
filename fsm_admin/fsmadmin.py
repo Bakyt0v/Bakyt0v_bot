@@ -73,7 +73,7 @@ async def registration(message: types.Message):
         psql_db.cursor.execute(f"INSERT INTO users (id, user_name, full_name) VALUES  (%s, %s, %s)",
                                (id, username, fullname))
         psql_db.database.commit()
-
+        await message.reply("Registration failed🤣")
 
 
 def register_handler_fsmadmin(dp: Dispatcher):
