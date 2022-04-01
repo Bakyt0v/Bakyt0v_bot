@@ -1,5 +1,5 @@
 import sqlite3
-from config_bot import bot
+
 
 
 

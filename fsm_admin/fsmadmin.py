@@ -10,6 +10,9 @@ from pasrer import movies
 
 
 
+
+# ==========================================================================================
+
 class FSMADMIN(StatesGroup):
     photo = State()
     title = State()
@@ -63,7 +66,14 @@ async def load_description(message: types.Message,
         #     await message.reply(str(data))
         # await state.finish()
 
+
+
+
+
+
 # =========================HOME==WORK==8===============================================
+
+
 async def registration(message: types.Message):
     id = message.from_user.id
     username = message.from_user.username
@@ -89,17 +99,28 @@ async def get_all_users(message: types.Message):
 
 # =================================================================================
 
+async def load_start(message: types.Message):
+        await FSMADMIN.photo.set()
+        await message.reply("Admin, Send me photo please")
 
-async def films(message: types.Message):
-    image = movies.URL
-    psql_db.cursor.execute(f"SELECT image from movies WHERE image = {image}")
-    result = psql_db.cursor.fetchone()
+async def load_movie(message: types.Message, state: FSMContext):
+    async with state.proxy():
+        image = message.photo[0].file_id
+        # title = message.text
+    psql_db.cursor.execute(f"SELECT image from movie WHERE image = {image}")
+    # psql_db.cursor.fetchone()
+    await psql_db.database.next()
+    await message.reply("Send me title of photo")
 
-    if not result:
-        psql_db.cursor.execute(f"INSERT INTO movies (image) VALUES  (%s)",
-                               (image))
-        psql_db.database.commit()
-        await message.reply("Registration failed🤣")
+    # psql_db.database.commit()
+    # await message.reply("Registration failed🤣")
+async def title_of_movie(message: types.Message,
+                     state: FSMContext):
+    async with state.proxy() as data:
+        data['title'] = message.text
+    psql_db.cursor.fetchone()
+    # psql_db.database.commit()
+    # await message.reply("Registration failed🤣")
 
 
 # async def get_all_users(message: types.Message):
@@ -122,4 +143,4 @@ def register_handler_fsmadmin(dp: Dispatcher):
     dp.register_message_handler(is_admin_func, commands=['admin'], is_chat_admin=True)
     dp.register_message_handler(registration, commands=["register"])
     dp.register_message_handler(get_all_users, commands=["get"])
-    dp.register_message_handler(films, commands=["movie"])
+    dp.register_message_handler(load_start, commands=["movie"])
