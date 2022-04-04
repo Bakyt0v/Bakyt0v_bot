@@ -6,7 +6,7 @@ from database import bot_db
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram.dispatcher.filters import Text
 from database import psql_db
-from pasrer import movies
+
 
 
 
@@ -76,61 +76,34 @@ async def load_description(message: types.Message,
 
 async def registration(message: types.Message):
     id = message.from_user.id
-    username = message.from_user.username
-    fullname = message.from_user.full_name
-    psql_db.cursor.execute(f"SELECT id from users WHERE id = {id}")
-    result = psql_db.cursor.fetchone()
-
-    if not result:
-        psql_db.cursor.execute(f"INSERT INTO users (id, user_name, full_name) VALUES  (%s, %s, %s)",
-                               (id, username, fullname))
+    title = message.from_user.username
+    descrip = message.text
+    psql_db.cursor.execute(f"SELECT id from moviess WHERE id = {id}")
+    # psql_db.cursor.fetchone()
+    await message.reply('send me the name of movie')
+    if message.text.startswith('movie'):
+        psql_db.cursor.execute(f"INSERT INTO moviess (id, title, descrip) VALUES  (%s, %s, %s)",
+                               (id, title, descrip))
         psql_db.database.commit()
-        await message.reply("Registration failed🤣")
+        await message.reply("Movie was succsesfuly added🤣")
 
 
-async def get_all_users(message: types.Message):
-    all_users = psql_db.cursor.execute(f"SELECT * FROM users")
+async def get_all_moviess(message: types.Message):
+    psql_db.cursor.execute(f"SELECT * FROM moviess")
     result = psql_db.cursor.fetchall()
     for row in result:
         # await message.reply(result)
         await message.reply(f"ID: {row[0]}\n"
-                            f"UserName👮 {row[1]}\n"
-                            f"FullNAme🤠 {row[2]}")
+                            f"Title📺 {row[1]}\n"
+                            f"Description {row[2]}")
+
 
 # =================================================================================
 
-async def load_start(message: types.Message):
-        await FSMADMIN.photo.set()
-        await message.reply("Admin, Send me photo please")
-
-async def load_movie(message: types.Message, state: FSMContext):
-    async with state.proxy():
-        image = message.photo[0].file_id
-        # title = message.text
-    psql_db.cursor.execute(f"SELECT image from movie WHERE image = {image}")
-    # psql_db.cursor.fetchone()
-    await psql_db.database.next()
-    await message.reply("Send me title of photo")
-
-    # psql_db.database.commit()
-    # await message.reply("Registration failed🤣")
-async def title_of_movie(message: types.Message,
-                     state: FSMContext):
-    async with state.proxy() as data:
-        data['title'] = message.text
-    psql_db.cursor.fetchone()
-    # psql_db.database.commit()
-    # await message.reply("Registration failed🤣")
 
 
-# async def get_all_users(message: types.Message):
-#     all_users = psql_db.cursor.execute(f"SELECT * FROM users")
-#     result = psql_db.cursor.fetchall()
-#     for row in result:
-#         # await message.reply(result)
-#         await message.reply(f"image: {row[0]}\n"
-#                             f"title👮 {row[1]}\n"
-#                             )
+
+
 
 # =================================================================================
 def register_handler_fsmadmin(dp: Dispatcher):
@@ -141,6 +114,10 @@ def register_handler_fsmadmin(dp: Dispatcher):
     dp.register_message_handler(load_title, state=FSMADMIN.title)
     dp.register_message_handler(load_description, state=FSMADMIN.description)
     dp.register_message_handler(is_admin_func, commands=['admin'], is_chat_admin=True)
-    dp.register_message_handler(registration, commands=["register"])
-    dp.register_message_handler(get_all_users, commands=["get"])
-    dp.register_message_handler(load_start, commands=["movie"])
+    dp.register_message_handler(registration, commands=["register"], content_types=['text'])
+    # dp.register_message_handler(hw_registration, commands=["update"])
+    dp.register_message_handler(get_all_moviess, commands=["get"])
+
+    # dp.register_message_handler(start, commands=["update"])
+    # dp.register_message_handler(get_stats, commands=["stats"])
+    # dp.callback_query_handler(message_from_user, func=lambda message: True, content_types=["text1"])

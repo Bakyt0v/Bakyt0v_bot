@@ -1,8 +1,5 @@
 import sqlite3
 
-
-
-
 def sql_create():
     global db, cursor
     db = sqlite3.connect('bot.sqlite3')
@@ -14,5 +11,7 @@ def sql_create():
 
 async def sql_command_insert(state):
     async with state.proxy() as data:
+
+
         cursor.execute("INSERT INTO anime VALUES (?, ?, ?)", tuple(data.values()))
         db.commit()
